@@ -1,26 +1,35 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from './types';
+import {RootStackParamList, useAppNavigation} from './types';
 import {HomeScreen} from '../screens/HomeScreen/HomeScreen';
 import {LoginScreen} from '../screens/LoginScreen/LoginScreen';
+import {Button} from 'react-native';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const HomeStackNavigator = () => {
+  const nav = useAppNavigation();
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name={'HomeScreen'}
-        component={HomeScreen}
-        options={{
-          title: 'Home',
-        }}
-      />
+    <Stack.Navigator initialRouteName="HomeScreen">
       <Stack.Screen
         name={'LoginScreen'}
         component={LoginScreen}
         options={{
           title: 'LoginScreen',
+        }}
+      />
+      <Stack.Screen
+        name={'HomeScreen'}
+        component={HomeScreen}
+        options={{
+          headerRight: () => (
+            <Button
+              onPress={() => nav.navigate('LoginScreen')}
+              title="Log Out"
+              color="blue"
+            />
+          ),
         }}
       />
     </Stack.Navigator>

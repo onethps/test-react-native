@@ -3,11 +3,10 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
-  LoginScreen: {
-    id: string;
-  };
+  LoginScreen: undefined;
 };
 
+//TODO: remove this value
 export type ImagePageProps = NativeStackScreenProps<
   RootStackParamList,
   'HomeScreen'
