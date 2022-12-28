@@ -1,49 +1,29 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {Card} from '../../components/Card/Card';
-import {usePostsData} from '../../hooks/usePostsData';
-import {ResponsePostType} from '../../types/types';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {usePostsData} from '../../hooks/useFetchPosts';
 import {Snackbar} from 'react-native-paper';
+import {useAppSelector} from '../../store/store';
+import {PostList} from '../../sections/home-screen/PostList';
 
 export const HomeScreen = () => {
   const {
     posts,
     refetchPosts,
     cleanFetchPostStatus,
-    loadingFetchStatus,
-    failedFetchStatus,
+    isFetching,
+    isFetchingFailed,
   } = usePostsData();
 
-  const renderItem = ({item}: {item: ResponsePostType}) => (
-    <View style={styles.sectionContainer}>
-      <Card item={item} />
-    </View>
-  );
-
-  if (loadingFetchStatus) {
-    return (
-      <SafeAreaView style={styles.preloaderContainer}>
-        <ActivityIndicator size="large" />
-      </SafeAreaView>
-    );
-  }
+  const errorAppMessage = useAppSelector(state => state.app.error);
+  const snackBarMessage = isFetchingFailed
+    ? 'Сталась помилка'
+    : errorAppMessage;
 
   return (
-    <SafeAreaView style={styles.sectionContainer}>
-      <FlatList
-        data={posts}
-        numColumns={1}
-        keyExtractor={({id}) => id.toString()}
-        renderItem={renderItem}
-      />
+    <SafeAreaView style={styles.container}>
+      <PostList posts={posts} isFetching={isFetching} />
       <Snackbar
-        visible={failedFetchStatus}
+        visible={!!errorAppMessage}
         onDismiss={cleanFetchPostStatus}
         action={{
           label: 'Повторити запит',
@@ -51,19 +31,14 @@ export const HomeScreen = () => {
             refetchPosts();
           },
         }}>
-        Сталась помилка
+        {snackBarMessage}
       </Snackbar>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  preloaderContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  sectionContainer: {
+  container: {
     flex: 1,
   },
 });

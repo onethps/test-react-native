@@ -1,15 +1,15 @@
 import {RequestStatusType} from './app-slice';
-import {fetchPosts} from './../middleware/posts';
-import {ResponsePostType} from './../../types/types';
+import {fetchPosts} from '../middleware/posts';
+import {ResponsePostType} from '../../types/types';
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-  posts: [] as ResponsePostType[],
+  postsData: [] as ResponsePostType[],
   status: 'loading' as RequestStatusType,
 };
 
 const {actions, reducer} = createSlice({
-  name: 'postsSlice',
+  name: 'commentsSlice',
   initialState,
   reducers: {
     setPostsStatus: (state, {payload}) => {
@@ -19,7 +19,7 @@ const {actions, reducer} = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchPosts.fulfilled, (state, {payload}) => {
-        state.posts = payload;
+        state.postsData = payload;
         state.status = 'success';
       })
       .addCase(fetchPosts.pending, state => {
