@@ -1,10 +1,14 @@
+import {postsSlice} from './slices/posts-slice';
+import {appSlice} from './slices/app-slice';
 import {authSlice} from './slices/auth';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 const rootReducer = combineReducers({
+  app: appSlice,
   auth: authSlice,
+  posts: postsSlice,
 });
 
 export const store = configureStore({

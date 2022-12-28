@@ -7,48 +7,19 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {useAppNavigation} from '../../navigation/types';
-import {validEmail} from '../../utils/validation-utils';
+import {useLoginUser} from '../../hooks/useLoginUser';
 
 //TODO:ADD USER ARRAY
 
 export const LoginScreen = () => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const nav = useAppNavigation();
-
-  const [error, setError] = React.useState<{email: string; password: string}>({
-    email: '',
-    password: '',
-  });
-
-  const onChangeEmailHandle = (text: string) => {
-    setError({password: '', email: ''});
-    setEmail(text);
-  };
-
-  const onChangePasswordHandle = (text: string) => {
-    setError({password: '', email: ''});
-    setPassword(text);
-  };
-
-  const handleSubmit = () => {
-    if (!validEmail.test(email)) {
-      setError(prev => {
-        return {...prev, email: 'Your email is invalid'};
-      });
-      return;
-    }
-    if (password.length < 8) {
-      setError(prev => {
-        return {...prev, password: 'Password must contain over 8 characters'};
-      });
-      return;
-    }
-
-    nav.navigate('HomeScreen');
-  };
+  const {
+    email,
+    password,
+    error,
+    onChangeEmailHandle,
+    onChangePasswordHandle,
+    handleSubmit,
+  } = useLoginUser();
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
