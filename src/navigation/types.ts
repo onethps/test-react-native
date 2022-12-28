@@ -4,6 +4,7 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 export type RootStackParamList = {
   HomeScreen: undefined;
   LoginScreen: undefined;
+  CommentsModal: undefined;
 };
 
 //TODO: remove this value

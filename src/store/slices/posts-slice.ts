@@ -8,10 +8,14 @@ const initialState = {
   status: 'loading' as RequestStatusType,
 };
 
-const {reducer} = createSlice({
+const {actions, reducer} = createSlice({
   name: 'postsSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    setPostsStatus: (state, {payload}) => {
+      state.status === payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchPosts.fulfilled, (state, {payload}) => {
@@ -27,4 +31,5 @@ const {reducer} = createSlice({
   },
 });
 
+export const {setPostsStatus} = actions;
 export const postsSlice = reducer;

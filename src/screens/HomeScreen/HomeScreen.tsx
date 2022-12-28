@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -9,9 +9,16 @@ import {
 import {Card} from '../../components/Card/Card';
 import {usePostsData} from '../../hooks/usePostsData';
 import {ResponsePostType} from '../../types/types';
+import {Snackbar} from 'react-native-paper';
 
 export const HomeScreen = () => {
-  const {isLoadingStatus, posts} = usePostsData();
+  const {
+    posts,
+    refetchPosts,
+    cleanFetchPostStatus,
+    loadingFetchStatus,
+    failedFetchStatus,
+  } = usePostsData();
 
   const renderItem = ({item}: {item: ResponsePostType}) => (
     <View style={styles.sectionContainer}>
@@ -19,7 +26,7 @@ export const HomeScreen = () => {
     </View>
   );
 
-  if (isLoadingStatus) {
+  if (loadingFetchStatus) {
     return (
       <SafeAreaView style={styles.preloaderContainer}>
         <ActivityIndicator size="large" />
@@ -35,6 +42,17 @@ export const HomeScreen = () => {
         keyExtractor={({id}) => id.toString()}
         renderItem={renderItem}
       />
+      <Snackbar
+        visible={failedFetchStatus}
+        onDismiss={cleanFetchPostStatus}
+        action={{
+          label: 'Повторити запит',
+          onPress: () => {
+            refetchPosts();
+          },
+        }}>
+        Сталась помилка
+      </Snackbar>
     </SafeAreaView>
   );
 };
