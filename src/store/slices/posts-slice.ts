@@ -5,17 +5,18 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   posts: [] as ResponsePostType[],
-  status: 'idle' as RequestStatusType,
+  status: 'loading' as RequestStatusType,
 };
 
-const {actions, reducer} = createSlice({
-  name: 'authSlice',
+const {reducer} = createSlice({
+  name: 'postsSlice',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchPosts.fulfilled, (state, {payload}) => {
         state.posts = payload;
+        state.status = 'success';
       })
       .addCase(fetchPosts.pending, state => {
         state.status = 'loading';

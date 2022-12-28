@@ -6,7 +6,7 @@ const initialState = {
   image: null,
 };
 
-const {actions, reducer} = createSlice({
+const {reducer} = createSlice({
   name: 'authSlice',
   initialState,
   reducers: {},

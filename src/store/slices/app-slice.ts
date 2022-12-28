@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-export type RequestStatusType = 'idle' | 'loading' | 'failed';
+export type RequestStatusType = 'idle' | 'loading' | 'failed' | 'success';
 export type errorType = string | null;
 
 const initialState = {
