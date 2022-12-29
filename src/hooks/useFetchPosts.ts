@@ -1,5 +1,5 @@
+import {readFile} from './../utils/file.utils';
 import {useEffect} from 'react';
-import {Dirs, FileSystem} from 'react-native-file-access';
 import {fetchPosts} from '../store/middleware';
 import {setPostsStatus, setAppError, setLocaleData} from '../store/slices';
 import {useAppDispatch, useAppSelector} from '../store/store';
@@ -27,14 +27,13 @@ export const usePostsData = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const fetchingLocalData = async () => {
-      const patch = Dirs.CacheDir + '/posts.json';
-      const data = await FileSystem.readFile(patch);
-      dispatch(setLocaleData(JSON.parse(data)));
+    const readingStorageData = async () => {
+      const data = await readFile();
+      dispatch(setLocaleData(data));
     };
 
     if (networkStatus === false) {
-      fetchingLocalData();
+      readingStorageData();
       return;
     }
   }, [networkStatus, dispatch]);
