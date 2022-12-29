@@ -13,7 +13,7 @@ export const Comment = ({item}: {item: ResponseCommentType}) => {
 
 const styles = StyleSheet.create({
   textContainer: {
-    backgroundColor: 'grey',
+    backgroundColor: 'white',
     borderRadius: 20,
     padding: 10,
   },

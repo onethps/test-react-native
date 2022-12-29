@@ -6,12 +6,16 @@ export type errorType = string | null;
 const initialState = {
   status: 'idle' as RequestStatusType,
   error: null as errorType,
+  networkStatus: true,
 };
 
 const {actions, reducer} = createSlice({
   name: 'authSlice',
   initialState,
   reducers: {
+    setNetworkStatus(state, {payload}) {
+      state.networkStatus = payload;
+    },
     setAppStatus(state, {payload}) {
       state.status = payload.status;
     },
@@ -22,4 +26,4 @@ const {actions, reducer} = createSlice({
 });
 
 export const appSlice = reducer;
-export const {setAppStatus, setAppError} = actions;
+export const {setAppStatus, setAppError, setNetworkStatus} = actions;

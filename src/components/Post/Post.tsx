@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {CommentList} from '../../sections/home-screen/CommentList';
-import {ResponsePostType} from '../../types/types';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {CommentList} from '../../sections';
+import {ResponsePostType} from '../../types';
 import {ModalWrapper} from '../ModalWrapper/ModalWrapper';
 
 export const Post = ({item}: {item: ResponsePostType}) => {
@@ -22,7 +22,7 @@ export const Post = ({item}: {item: ResponsePostType}) => {
         </View>
       </TouchableOpacity>
       <ModalWrapper open={openModal} onClose={onCloseModal}>
-        <CommentList postId={postId} />
+        <CommentList postId={postId} onCloseModal={onCloseModal} />
       </ModalWrapper>
     </View>
   );

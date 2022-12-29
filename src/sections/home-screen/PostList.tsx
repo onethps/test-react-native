@@ -1,20 +1,15 @@
 import React, {FC} from 'react';
 import {FlatList} from 'react-native';
-import {Post} from '../../components/Post/Post';
-import {Preloader} from '../../components/Preloader/Preloader';
-import {ResponsePostType} from '../../types/types';
+import {Post} from '../../components';
+import {ResponsePostType} from '../../types';
 
 interface PostListProps {
   posts: ResponsePostType[];
-  isFetching: boolean;
 }
 
-export const PostList: FC<PostListProps> = ({posts, isFetching}) => {
+export const PostList: FC<PostListProps> = ({posts}) => {
   const renderItem = ({item}: {item: ResponsePostType}) => <Post item={item} />;
 
-  if (isFetching) {
-    return <Preloader />;
-  }
   return (
     <FlatList
       data={posts}

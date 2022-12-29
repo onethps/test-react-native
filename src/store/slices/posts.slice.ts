@@ -1,7 +1,7 @@
-import {RequestStatusType} from './app-slice';
-import {fetchPosts} from '../middleware/posts';
-import {ResponsePostType} from '../../types/types';
 import {createSlice} from '@reduxjs/toolkit';
+import {ResponsePostType} from '../../types';
+import {fetchPosts} from '../middleware';
+import {RequestStatusType} from './app.slice';
 
 const initialState = {
   postsData: [] as ResponsePostType[],
@@ -14,6 +14,9 @@ const {actions, reducer} = createSlice({
   reducers: {
     setPostsStatus: (state, {payload}) => {
       state.status === payload;
+    },
+    setLocaleData: (state, {payload}) => {
+      state.postsData = payload;
     },
   },
   extraReducers: builder => {
@@ -31,5 +34,5 @@ const {actions, reducer} = createSlice({
   },
 });
 
-export const {setPostsStatus} = actions;
+export const {setPostsStatus, setLocaleData} = actions;
 export const postsSlice = reducer;

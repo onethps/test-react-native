@@ -7,7 +7,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {useLoginUser} from '../../hooks/useLoginUser';
+import {AppLayout} from '../../components';
+import {useLoginUser} from '../../hooks';
 
 //TODO:ADD USER ARRAY
 
@@ -22,35 +23,37 @@ export const LoginScreen = () => {
   } = useLoginUser();
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={onChangeEmailHandle}
-          value={email}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          onChangeText={onChangePasswordHandle}
-          defaultValue={password}
-          secureTextEntry
-        />
-      </View>
+    <AppLayout>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            onChangeText={onChangeEmailHandle}
+            value={email}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            onChangeText={onChangePasswordHandle}
+            defaultValue={password}
+            secureTextEntry
+          />
+        </View>
 
-      <View style={styles.buttonContainer}>
-        {password && email ? (
-          <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-            <Text style={[styles.button, styles.buttonText]}>Login</Text>
-          </TouchableOpacity>
-        ) : null}
-      </View>
-      <View style={styles.errorContainer}>
-        {error.email && <Text>{error.email}</Text>}
-        {error.password && <Text>{error.password}</Text>}
-      </View>
-    </KeyboardAvoidingView>
+        <View style={styles.buttonContainer}>
+          {password && email ? (
+            <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+              <Text style={[styles.button, styles.buttonText]}>Login</Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
+        <View style={styles.errorContainer}>
+          {error.email && <Text>{error.email}</Text>}
+          {error.password && <Text>{error.password}</Text>}
+        </View>
+      </KeyboardAvoidingView>
+    </AppLayout>
   );
 };
 

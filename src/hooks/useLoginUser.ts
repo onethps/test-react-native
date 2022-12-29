@@ -1,6 +1,7 @@
-import {validEmail} from './../utils/validation-utils';
 import React from 'react';
-import {useAppNavigation} from '../navigation/types';
+import {useAppNavigation} from '../navigation';
+import {validEmail} from '../utils';
+
 export const useLoginUser = () => {
   const nav = useAppNavigation();
 

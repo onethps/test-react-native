@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList} from 'react-native';
-import {Comment} from '../../components/Comment/Comment';
-import {Preloader} from '../../components/Preloader/Preloader';
-import {useFetchComments} from '../../hooks/useFetchComments';
-import {ResponseCommentType} from '../../types/types';
+import {Comment, Preloader} from '../../components';
+import {useFetchComments} from '../../hooks';
+import {ResponseCommentType} from '../../types';
 
-export const CommentList = ({postId}: {postId: null | number}) => {
-  const {comments, isFetching} = useFetchComments(postId);
+export const CommentList = ({
+  postId,
+  onCloseModal,
+}: {
+  postId: null | number;
+  onCloseModal: (v: boolean) => void;
+}) => {
+  const {comments, isFetching, isFetchingError} = useFetchComments(postId);
+
+  useEffect(() => {
+    if (isFetchingError) {
+      onCloseModal(false);
+    }
+  }, [isFetchingError]);
 
   const renderItem = ({item}: {item: ResponseCommentType}) => (
     <Comment item={item} />

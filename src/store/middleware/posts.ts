@@ -1,7 +1,8 @@
-import {thunkTryCatch} from './../../services/thunk-try-catch';
-import {postsAPI} from './../../services/api/posts';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {ResponseCommentType, ResponsePostType} from '../../types/types';
+import {thunkTryCatch} from '../../services';
+import {postsAPI} from '../../services/api';
+import {ResponseCommentType, ResponsePostType} from '../../types';
+import {writeFile} from '../../utils';
 
 export const fetchPosts = createAsyncThunk<
   ResponsePostType[],
@@ -10,6 +11,7 @@ export const fetchPosts = createAsyncThunk<
 >('posts/fetchPosts', async (_, thunkApi) => {
   return thunkTryCatch(thunkApi, async () => {
     const res = await postsAPI.getPosts();
+    writeFile(res.data);
     return res.data;
   });
 });

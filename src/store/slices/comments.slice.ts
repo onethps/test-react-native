@@ -1,7 +1,7 @@
-import {RequestStatusType} from './app-slice';
-import {fetchComments} from '../middleware/posts';
-import {ResponseCommentType} from '../../types/types';
 import {createSlice} from '@reduxjs/toolkit';
+import {ResponseCommentType} from '../../types';
+import {fetchComments} from '../middleware';
+import {RequestStatusType} from './app.slice';
 
 const initialState = {
   commentsData: [] as ResponseCommentType[],
@@ -27,6 +27,7 @@ const {actions, reducer} = createSlice({
       })
       .addCase(fetchComments.rejected, state => {
         state.status = 'failed';
+        state.commentsData = [];
       });
   },
 });

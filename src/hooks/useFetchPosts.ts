@@ -1,13 +1,14 @@
-import {useAppSelector, useAppDispatch} from '../store/store';
-import {fetchPosts} from '../store/middleware/posts';
 import {useEffect} from 'react';
-import {setPostsStatus} from '../store/slices/posts-slice';
-import {setAppError} from '../store/slices/app-slice';
+import {Dirs, FileSystem} from 'react-native-file-access';
+import {fetchPosts} from '../store/middleware';
+import {setPostsStatus, setAppError, setLocaleData} from '../store/slices';
+import {useAppDispatch, useAppSelector} from '../store/store';
 
 export const usePostsData = () => {
   const dispatch = useAppDispatch();
   const posts = useAppSelector(state => state.posts.postsData);
   const status = useAppSelector(state => state.posts.status);
+  const networkStatus = useAppSelector(state => state.app.networkStatus);
 
   const isFetching = status === 'loading';
   const isFetchingFailed = status === 'failed';
@@ -24,6 +25,19 @@ export const usePostsData = () => {
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
+
+  useEffect(() => {
+    const fetchingLocalData = async () => {
+      const patch = Dirs.CacheDir + '/posts.json';
+      const data = await FileSystem.readFile(patch);
+      dispatch(setLocaleData(JSON.parse(data)));
+    };
+
+    if (!networkStatus) {
+      fetchingLocalData();
+      return;
+    }
+  }, [networkStatus, dispatch]);
 
   return {
     posts,

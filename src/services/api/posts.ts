@@ -1,4 +1,4 @@
-import {ResponsePostType, ResponseCommentType} from './../../types/types';
+import {ResponseCommentType, ResponsePostType} from '../../types';
 import {instance} from '../config';
 
 export const postsAPI = {

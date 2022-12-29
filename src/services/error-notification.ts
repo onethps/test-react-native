@@ -1,6 +1,6 @@
 import {AxiosError} from 'axios';
 import {Dispatch} from '@reduxjs/toolkit';
-import {setAppError, setAppStatus} from '../store/slices/app-slice';
+import {setAppError, setAppStatus} from '../store/slices/app.slice';
 
 export const handleAxiosError = (error: unknown, dispatch: Dispatch) => {
   if (error instanceof AxiosError) {

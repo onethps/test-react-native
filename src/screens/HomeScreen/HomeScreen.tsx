@@ -1,9 +1,10 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import {usePostsData} from '../../hooks/useFetchPosts';
+
 import {Snackbar} from 'react-native-paper';
+import {AppLayout, Preloader} from '../../components';
+import {usePostsData} from '../../hooks';
+import {PostList} from '../../sections';
 import {useAppSelector} from '../../store/store';
-import {PostList} from '../../sections/home-screen/PostList';
 
 export const HomeScreen = () => {
   const {
@@ -19,26 +20,27 @@ export const HomeScreen = () => {
     ? 'Сталась помилка'
     : errorAppMessage;
 
+  if (isFetching) {
+    return <Preloader />;
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
-      <PostList posts={posts} isFetching={isFetching} />
-      <Snackbar
-        visible={!!errorAppMessage}
-        onDismiss={cleanFetchPostStatus}
-        action={{
-          label: 'Повторити запит',
-          onPress: () => {
-            refetchPosts();
-          },
-        }}>
-        {snackBarMessage}
-      </Snackbar>
-    </SafeAreaView>
+    <AppLayout>
+      <>
+        <PostList posts={posts} />
+        <Snackbar
+          duration={6000}
+          visible={!!errorAppMessage}
+          onDismiss={cleanFetchPostStatus}
+          action={{
+            label: 'Повторити запит',
+            onPress: () => {
+              refetchPosts();
+            },
+          }}>
+          {snackBarMessage}
+        </Snackbar>
+      </>
+    </AppLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
