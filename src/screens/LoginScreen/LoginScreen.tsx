@@ -54,6 +54,7 @@ export const LoginScreen = () => {
         <View style={styles.errorContainer}>
           {error.email && <Text>{error.email}</Text>}
           {error.password && <Text>{error.password}</Text>}
+          {error.validate && <Text>{error.validate}</Text>}
         </View>
       </KeyboardAvoidingView>
     </AppLayout>
