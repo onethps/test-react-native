@@ -3,8 +3,9 @@ import React from 'react';
 import {Snackbar} from 'react-native-paper';
 import {AppLayout, Preloader} from '../../components';
 import {usePostsData} from '../../hooks';
-import {PostList} from '../../sections';
+
 import {useAppSelector} from '../../store/store';
+import {PostList} from './sections';
 
 export const HomeScreen = () => {
   const {

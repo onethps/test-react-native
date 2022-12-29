@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {CommentList} from '../../sections';
+import {CommentList} from '../../screens/HomeScreen/sections';
+
 import {ResponsePostType} from '../../types';
 import {ModalWrapper} from '../ModalWrapper/ModalWrapper';
 

@@ -12,7 +12,7 @@ export const AppLayout = ({children}: {children: ReactElement}) => {
 
   useEffect(() => {
     dispatch(setNetworkStatus(netWorkInfo.isConnected));
-  }, [netWorkInfo]);
+  }, [netWorkInfo, dispatch]);
 
   return (
     <SafeAreaView style={styles.container}>

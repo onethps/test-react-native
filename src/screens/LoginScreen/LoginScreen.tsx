@@ -11,8 +11,6 @@ import {
 import {AppLayout} from '../../components';
 import {useLoginUser} from '../../hooks';
 
-//TODO:ADD USER ARRAY
-
 export const LoginScreen = () => {
   const {
     email,

@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const {actions, reducer} = createSlice({
-  name: 'authSlice',
+  name: 'appSlice',
   initialState,
   reducers: {
     setNetworkStatus(state, {payload}) {

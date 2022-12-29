@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {FlatList} from 'react-native';
-import {Post} from '../../components';
-import {ResponsePostType} from '../../types';
+import {Post} from '../../../components';
+import {ResponsePostType} from '../../../types';
 
 interface PostListProps {
   posts: ResponsePostType[];

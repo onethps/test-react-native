@@ -30,7 +30,12 @@ export const useLoginUser = () => {
 
   const handleSubmit = () => {
     const isValidUser = users.some(
-      u => JSON.stringify(u) === JSON.stringify({email, password}),
+      u =>
+        JSON.stringify(u) ===
+        JSON.stringify({
+          email: email.toLowerCase(),
+          password: password.toLowerCase(),
+        }),
     );
 
     if (!validEmail.test(email)) {

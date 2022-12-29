@@ -33,7 +33,7 @@ export const usePostsData = () => {
       dispatch(setLocaleData(JSON.parse(data)));
     };
 
-    if (!networkStatus) {
+    if (networkStatus === false) {
       fetchingLocalData();
       return;
     }

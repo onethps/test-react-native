@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const {actions, reducer} = createSlice({
-  name: 'commentsSlice',
+  name: 'postsSlice',
   initialState,
   reducers: {
     setPostsStatus: (state, {payload}) => {

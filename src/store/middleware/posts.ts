@@ -20,7 +20,7 @@ export const fetchComments = createAsyncThunk<
   ResponseCommentType[],
   {id: number},
   {rejectValue: string}
->('posts/fetchPost', async ({id}, thunkApi) => {
+>('posts/fetchComments', async ({id}, thunkApi) => {
   return thunkTryCatch(thunkApi, async () => {
     const res = await postsAPI.getComments(id);
     return res.data;
