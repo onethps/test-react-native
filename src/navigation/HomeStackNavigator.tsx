@@ -23,6 +23,7 @@ export const HomeStackNavigator = () => {
         name={'HomeScreen'}
         component={HomeScreen}
         options={{
+          headerBackVisible: false,
           headerRight: () => (
             <Button
               onPress={() => nav.navigate('LoginScreen')}
