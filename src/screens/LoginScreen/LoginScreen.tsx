@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {AppLayout} from '../../components';
 import {useLoginUser} from '../../hooks';
@@ -24,7 +25,9 @@ export const LoginScreen = () => {
 
   return (
     <AppLayout>
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}

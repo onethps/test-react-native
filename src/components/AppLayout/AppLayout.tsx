@@ -2,6 +2,7 @@ import {ReactElement, useEffect} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {setNetworkStatus} from '../../store/slices';
 import {useAppDispatch} from '../../store/store';
+import React from 'react';
 import {NetworkStatusBanner} from '../NetworkStatusBanner/NetworkStatusBanner';
 import {useNetInfo} from '@react-native-community/netinfo';
 
